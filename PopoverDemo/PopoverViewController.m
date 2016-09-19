@@ -38,17 +38,19 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.myTextField = [[UITextField alloc] initWithFrame:CGRectMake(0,0,self.preferredContentSize.width-32,45)];
-    self.myTextField.adjustsFontSizeToFitWidth = NO;
-    self.myTextField.backgroundColor = [UIColor colorWithRed:1.000 green:1.000 blue:0.666 alpha:0.3];
-    self.myTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.myTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    self.myTextField.keyboardType = UIKeyboardTypeDefault;
-    self.myTextField.returnKeyType = UIReturnKeyDone;
-    self.myTextField.clearButtonMode = UITextFieldViewModeNever;
-    self.myTextField.placeholder = @"Enter text here";
-    self.myTextField.text = [NSString stringWithFormat:@"%@", [self.cellNames objectAtIndex:(self.cellNames.count-1)]];
-    //self.myTextField.delegate = self;
+    if (self.textFieldEnabled) {
+        self.myTextField = [[UITextField alloc] initWithFrame:CGRectMake(0,0,self.preferredContentSize.width-32,45)];
+        self.myTextField.adjustsFontSizeToFitWidth = NO;
+        self.myTextField.backgroundColor = [UIColor colorWithRed:1.000 green:1.000 blue:0.666 alpha:0.3];
+        self.myTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        self.myTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        self.myTextField.keyboardType = UIKeyboardTypeDefault;
+        self.myTextField.returnKeyType = UIReturnKeyDone;
+        self.myTextField.clearButtonMode = UITextFieldViewModeNever;
+        self.myTextField.placeholder = @"Enter text here";
+        self.myTextField.text = [NSString stringWithFormat:@"%@", [self.cellNames objectAtIndex:(self.cellNames.count-1)]];
+        //self.myTextField.delegate = self;
+    }
     
     //NSLog(@"self %@, tV %@, tV.del %@", self, self.tableView, self.tableView.delegate);
 }
@@ -61,6 +63,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     if (self.cellSelected > 0) {
         NSInteger i = self.cellSelected - 1;
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
@@ -167,7 +170,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField == self.myTextField && ![textField.text isEqual: @""]) {
+    if (self.textFieldEnabled && textField == self.myTextField && ![textField.text isEqual: @""]) {
         if (self.delegateid && [self.delegateid respondsToSelector:@selector(updateViewWithSelectedData:)]) {
             self.cellSelected = self.cellNames.count - 1;
             [self.delegateid updateViewWithSelectedData:textField.text];
@@ -185,8 +188,10 @@
     self.cellSelected = i + 1;
     NSLog(@"didSelectRowAtIndexPath %ld, self.cellSelected = %ld", (long)indexPath.row, (long)self.cellSelected);
     if (![self.cellNames[i] isEqual: @""]) {
-        self.myTextField.text = @"";
-        [self.myTextField resignFirstResponder];
+        if (self.textFieldEnabled) {
+            self.myTextField.text = @"";
+            [self.myTextField resignFirstResponder];
+        }
         if (self.delegateid && [self.delegateid respondsToSelector:@selector(updateViewWithSelectedData:)]) {
             [self.delegateid updateViewWithSelectedData:self.cellNames[i]];
         }
