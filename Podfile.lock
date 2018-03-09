@@ -1,16 +1,15 @@
 PODS:
-  - BFPaperCheckbox (1.2.8):
-    - UIColor+BFPaperColors
+  - BFPaperCheckbox (2.1.0)
   - UIColor+BFPaperColors (1.7.6)
 
 DEPENDENCIES:
-  - BFPaperCheckbox (~> 1.2.8)
+  - BFPaperCheckbox (~> 2.1)
   - UIColor+BFPaperColors (~> 1.7)
 
 SPEC CHECKSUMS:
-  BFPaperCheckbox: 8817f6a07ba8b296867a2ff555cfd3b02a1a1262
+  BFPaperCheckbox: 447570b82c15e16e8cf427a83ef1ad04ae1dc6c7
   UIColor+BFPaperColors: 37e7b48fa86b29ff2e97a11208ab9cb5ab0b883d
 
-PODFILE CHECKSUM: b954b6e8ab106adc472980af9c905de436450962
+PODFILE CHECKSUM: dcadd55957662adf4ad7ab2a4274ff1e38470f7a
 
 COCOAPODS: 1.2.1

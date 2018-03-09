@@ -9,6 +9,6 @@ project 'PopoverDemo'
 #
 target "PopoverDemo" do
   pod 'UIColor+BFPaperColors', '~> 1.7'
-  pod 'BFPaperCheckbox', '~> 1.2.8'
+  pod 'BFPaperCheckbox', '~> 2.1'
 end
 
