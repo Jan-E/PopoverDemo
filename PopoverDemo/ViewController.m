@@ -196,11 +196,12 @@
 # pragma mark - Popover Presentation Controller Delegate
 
 // Called on the delegate when the user has taken action to dismiss the presentation successfully, after all animations are finished.
-// This is not called if the presentation is dismissed programatically.
+// This is not called if the presentation is dismissed programmatically.
 // @available(iOS 13.0, *)
 - (void)presentationControllerDidDismiss:(UIPopoverPresentationController *)popoverPresentationController {
     //NSLog(@"called when a Popover is dismissed");
     NSLog(@"presentationControllerDidDismiss %@, self.popVC.cellSelected = %ld", self.popVC.senderButton, (long)self.popVC.cellSelected);
+    [self updateViewWithChosenData];
 }
 
 -(void)updateViewWithChosenData {
