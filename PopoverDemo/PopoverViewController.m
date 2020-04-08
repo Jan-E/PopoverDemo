@@ -96,7 +96,11 @@
                 i = self.cellSelected - 1;
                 NSLog(@"viewDidDisappear %@ - %@ : %@ %ld %@", self.delegateid, self, self.senderButton, (long)self.cellSelected, self.cellNames[i]);
                 [self.delegateid updateViewWithSelectedData:self.cellNames[i]];
+            } else {
+                NSLog(@"viewDidDisappear %@ - %@ : %@ %ld", self.delegateid, self, self.senderButton, (long)self.cellSelected);
             }
+        } else {
+            NSLog(@"viewDidDisappear %@", self);
         }
     }
 }
