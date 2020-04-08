@@ -82,6 +82,25 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    // https://stackoverflow.com/a/60045400/872051
+    NSInteger i = 0;
+    if (@available(iOS 13.0, *)) {
+        // didSelectRowAtIndexPath did didmiss to delegate
+        NSLog(@"didSelectRowAtIndexPath invoked viewDidDisappear %@ - %@ : %@", self.delegateid, self, self.senderButton);
+    } else {
+        if (self.delegateid && [self.delegateid respondsToSelector:@selector(updateViewWithSelectedData:)]) {
+            if (self.cellSelected > 0) {
+                i = self.cellSelected - 1;
+                NSLog(@"viewDidDisappear %@ - %@ : %@ %ld %@", self.delegateid, self, self.senderButton, (long)self.cellSelected, self.cellNames[i]);
+                [self.delegateid updateViewWithSelectedData:self.cellNames[i]];
+            }
+        }
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -187,16 +206,21 @@
     NSInteger i = indexPath.row;
     self.cellSelected = i + 1;
     NSLog(@"didSelectRowAtIndexPath %ld, self.cellSelected = %ld", (long)indexPath.row, (long)self.cellSelected);
-    if (![self.cellNames[i] isEqual: @""]) {
-        if (self.textFieldEnabled) {
-            self.myTextField.text = @"";
-            [self.myTextField resignFirstResponder];
+    if (@available(iOS 13.0, *)) {
+        if (![self.cellNames[i] isEqual: @""]) {
+            if (self.textFieldEnabled) {
+                self.myTextField.text = @"";
+                [self.myTextField resignFirstResponder];
+            }
+            if (self.delegateid && [self.delegateid respondsToSelector:@selector(updateViewWithSelectedData:)]) {
+                [self.delegateid updateViewWithSelectedData:self.cellNames[i]];
+            }
         }
-        if (self.delegateid && [self.delegateid respondsToSelector:@selector(updateViewWithSelectedData:)]) {
-            [self.delegateid updateViewWithSelectedData:self.cellNames[i]];
-        }
+    } else {
+        // use viewDidDisappear
+        [self dismissMe];
     }
-    
+
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
