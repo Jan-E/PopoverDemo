@@ -195,10 +195,12 @@
 
 # pragma mark - Popover Presentation Controller Delegate
 
-- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+// Called on the delegate when the user has taken action to dismiss the presentation successfully, after all animations are finished.
+// This is not called if the presentation is dismissed programatically.
+// @available(iOS 13.0, *)
+- (void)presentationControllerDidDismiss:(UIPopoverPresentationController *)popoverPresentationController {
     //NSLog(@"called when a Popover is dismissed");
-    NSLog(@"dismissed %@, self.popVC.cellSelected = %ld", self.popVC.senderButton, (long)self.popVC.cellSelected);
-    [self updateViewWithChosenData];
+    NSLog(@"presentationControllerDidDismiss %@, self.popVC.cellSelected = %ld", self.popVC.senderButton, (long)self.popVC.cellSelected);
 }
 
 -(void)updateViewWithChosenData {
@@ -238,13 +240,13 @@
     }
 }
 
-- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+- (BOOL)presentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
     //NSLog(@"return if a Popover should (not) dismissed");
-    NSLog(@"should (or not) dismiss %@, self.popVC.cellSelected = %ld", self.popVC.senderButton, (long)self.popVC.cellSelected);
+    NSLog(@"presentationControllerShouldDismissPopover %@, self.popVC.cellSelected = %ld", self.popVC.senderButton, (long)self.popVC.cellSelected);
     
     // return YES if the Popover should be dismissed
     // return NO if the Popover should not be dismissed
-    return YES;
+    return NO;
 }
 
 - (void)popoverPresentationController:(UIPopoverPresentationController *)popoverPresentationController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing  _Nonnull *)view {
