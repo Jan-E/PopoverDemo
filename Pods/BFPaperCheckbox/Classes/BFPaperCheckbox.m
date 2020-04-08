@@ -262,7 +262,7 @@ static NSString *const mark_eraseLongLine = @"largeCheckmarkLine2";
     tapGestureRecognizer.delegate = self;
     [self addGestureRecognizer:tapGestureRecognizer];
     
-    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:)];
+    //[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:)];
 }
 
 
@@ -486,7 +486,7 @@ static NSString *const mark_eraseLongLine = @"largeCheckmarkLine2";
     CABasicAnimation *tapCircleGrowthAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
     tapCircleGrowthAnimation.delegate = self;
     [tapCircleGrowthAnimation setValue:@"tapGrowth" forKey:@"id"];
-    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:)];
+    //[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:)];
     tapCircleGrowthAnimation.duration = self.touchDownAnimationDuration;
     tapCircleGrowthAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     tapCircleGrowthAnimation.fromValue = (__bridge id)startingCirclePath.CGPath;
