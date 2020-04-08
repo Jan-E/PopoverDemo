@@ -91,6 +91,14 @@
         // didSelectRowAtIndexPath did didmiss to delegate
         NSLog(@"didSelectRowAtIndexPath invoked viewDidDisappear %@ - %@ : %@", self.delegateid, self, self.senderButton);
     } else {
+        if (self.textFieldEnabled &&
+            self.cellSelected == 0 &&
+            ![self.myTextField.text isEqualToString:@""]
+        ) {
+            self.cellSelected = self.cellNames.count;
+            [self.myTextField resignFirstResponder];
+            NSLog(@"viewDidDisappear detected myTextField was '%@'", self.myTextField.text);
+        }
         if (self.delegateid && [self.delegateid respondsToSelector:@selector(updateViewWithSelectedData:)]) {
             if (self.cellSelected > 0) {
                 i = self.cellSelected - 1;
