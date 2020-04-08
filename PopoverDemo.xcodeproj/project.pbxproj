@@ -38,6 +38,7 @@
 		E2E4FAB917455F8B007EACB5 /* PopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverViewController.h; sourceTree = "<group>"; };
 		E2E4FABA17455F8B007EACB5 /* PopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverViewController.m; sourceTree = "<group>"; };
 		F79B2877243D8AF50021E3A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewController.xib; sourceTree = "<group>"; };
+		F79B2878243D953F0021E3A2 /* PopoverDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PopoverDemo.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +97,7 @@
 		E2E4FA8F1745019E007EACB5 /* PopoverDemo */ = {
 			isa = PBXGroup;
 			children = (
+				F79B2878243D953F0021E3A2 /* PopoverDemo.entitlements */,
 				E2E4FA981745019E007EACB5 /* AppDelegate.h */,
 				E2E4FA921745019E007EACB5 /* InfoPlist.strings */,
 				E2E4FA991745019E007EACB5 /* AppDelegate.m */,
@@ -370,12 +372,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1088DBC95655DD5E6425E886 /* Pods-PopoverDemo.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PopoverDemo/PopoverDemo.entitlements;
 				DEVELOPMENT_TEAM = 7J77685L3X;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PopoverDemo/PopoverDemo-Prefix.pch";
 				INFOPLIST_FILE = "PopoverDemo/PopoverDemo-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ioscreator.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -384,12 +388,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DE990649CE06017B86C446BF /* Pods-PopoverDemo.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PopoverDemo/PopoverDemo.entitlements;
 				DEVELOPMENT_TEAM = 7J77685L3X;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PopoverDemo/PopoverDemo-Prefix.pch";
 				INFOPLIST_FILE = "PopoverDemo/PopoverDemo-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ioscreator.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
