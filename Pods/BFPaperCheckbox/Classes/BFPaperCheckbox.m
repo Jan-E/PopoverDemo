@@ -407,9 +407,14 @@ static NSString *const mark_eraseLongLine = @"largeCheckmarkLine2";
 - (CGPathRef)createCenteredLineWithRadius:(CGFloat)radius angle:(CGFloat)angle offset:(CGPoint)offset
 // you are responsible for releasing the return CGPath
 {
+    
+    CGMutablePathRef path;
+#ifdef __clang_analyzer__
+    path = nil;
+#else
     self.centerPoint = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
     
-    CGMutablePathRef path = CGPathCreateMutable();
+    path = CGPathCreateMutable();
     
     float c = cosf(angle);
     float s = sinf(angle);
@@ -420,7 +425,7 @@ static NSString *const mark_eraseLongLine = @"largeCheckmarkLine2";
     CGPathAddLineToPoint(path, NULL,
                          self.centerPoint.x + offset.x - radius * c,
                          self.centerPoint.y + offset.y - radius * s);
-    
+#endif
     return path;
 }
 
